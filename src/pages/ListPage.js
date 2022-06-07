@@ -1,0 +1,72 @@
+import React, { useEffect, useContext } from "react";
+
+import TableItem from "../components/TableItem";
+import { useParams } from "react-router-dom";
+import { Store } from "../store";
+import axios from "axios";
+
+function ListPage() {
+  const { id } = useParams();
+
+  const {
+    state: { start },
+    dispatch,
+  } = useContext(Store);
+
+  useEffect(() => {
+    async function getCustomerRequestData() {
+      dispatch({ type: "START_FETCHING", payload: true });
+      try {
+        let startingPoint = start > -1 ? start : 0;
+        const { data } = await axios.post(
+          `https://sellbackend.creditclan.com/parent/index.php/globalrequest/getmerchants/${startingPoint}`,
+          { user_id: id }
+        );
+        console.log(data.data);
+        dispatch({ type: "GET_REQUEST", payload: data.data });
+        dispatch({ type: "END_FETCHING", payload: false });
+      } catch (error) {
+        dispatch({ type: "END_FETCHING", payload: false });
+        console.log(error);
+      }
+    }
+    getCustomerRequestData();
+  }, [id, dispatch, start]);
+
+  const next_function = async () => {
+    dispatch({ type: "INCREASE_START", payload: start + 20 });
+  };
+
+  const pre_function = async () => {
+    dispatch({ type: "REDUCE_START", payload: start - 20 });
+  };
+
+  return (
+    <>
+      <main className="overflow-auto mt-5">
+        <div className="max-w-7xl mx-auto py-2 sm:px-6 lg:px-8 overflow-auto">
+          <div className="px-4 py-2 sm:px-0">
+            <TableItem></TableItem>
+
+            <div className="flex justify-end  mb-2 pr-5 ">
+              <button
+                onClick={pre_function}
+                className="border text-myColor font-bold py-2 px-2 mr-3"
+              >
+                Previous
+              </button>
+              <button
+                onClick={next_function}
+                className="border text-myColor font-bold  py-2 px-2"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </>
+  );
+}
+
+export default ListPage;
