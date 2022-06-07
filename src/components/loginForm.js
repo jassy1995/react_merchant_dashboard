@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Store } from "../store";
+import { toast } from "react-toastify";
 
 function Login() {
   let [isLoading, setIsLoading] = useState(false);
@@ -35,6 +36,7 @@ function Login() {
           );
         dispatch({ type: "SAVE_USER", payload: response.data.user });
         if (response.data.status) {
+          toast.success("successfully logged in");
           setSubmitingText("logged In");
           setEmail("");
           setPassword("");
@@ -42,10 +44,15 @@ function Login() {
             setIsLoading(false);
             navigate(`/list/${response.data.user.id}`);
           }, 1000);
+        } else {
+          setIsLoading(false);
+          toast.error("incorrect email or password");
         }
       })
       .catch((error) => {
+        let msg = error?.message ? error.message : "Internal Server Error";
         setIsLoading(false);
+        toast.error(msg);
         console.log(error);
       });
   };
@@ -53,7 +60,7 @@ function Login() {
   return (
     <>
       <form
-        className="w-full mx-auto p-5 shadow-lg rounded-lg max-w-full mt-5"
+        className="w-full mx-auto p-5 ring-1 ring-slate-200 rounded-lg max-w-full mt-5"
         onSubmit={handleSubmit}
       >
         <div className="flex flex-wrap  mb-3 mx-auto text-center mt-4">
@@ -63,7 +70,9 @@ function Login() {
                 {submitingText}
               </h2>
             ) : (
-              <h2 className="text-center font-bold mb-4">login here</h2>
+              <h2 className="text-center font-thin mb-4 text-2xl">
+                Sign in to your account
+              </h2>
             )}
           </div>
           <div className="flex flex-col  space-y-6 mx-auto w-full items-center">

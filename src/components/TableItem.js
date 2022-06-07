@@ -11,9 +11,12 @@ function TableItem() {
   const [requestId, setRequestId] = useState(null);
   const [open, setOpen] = useState(false);
 
-  const giveFeedback = (id) => {
-    setRequestId(id);
-    setOpen(true);
+  const giveFeedback = (id, checkFeedback) => {
+    console.log(checkFeedback);
+    if (checkFeedback?.toString() === "0") {
+      setRequestId(id);
+      setOpen(true);
+    } else return;
   };
 
   const closeModal = () => {
@@ -107,10 +110,18 @@ function TableItem() {
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border border-slate-300">
                           <button
-                            className="btn text-sm text-gray-500"
-                            onClick={() => giveFeedback(request.id)}
+                            className={
+                              request?.feedback_provided?.toString() === "1"
+                                ? "bg-green-500"
+                                : "bg-red-500"
+                            }
+                            onClick={() =>
+                              giveFeedback(
+                                request.id,
+                                request.feedback_provided
+                              )
+                            }
                             style={{
-                              backgroundColor: "green",
                               padding: "5px",
                               color: "white",
                               borderRadius: "8px",

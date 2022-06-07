@@ -22,7 +22,6 @@ function FeedBackForm() {
     setSubmitingText("Submitting...");
     evt.preventDefault();
     console.log(JSON.parse(wesabiUser)?.id);
-    console.log(id);
     const data = {
       id,
       user_id: JSON.parse(wesabiUser)?.id,

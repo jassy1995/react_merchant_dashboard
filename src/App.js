@@ -9,11 +9,14 @@ import ArtisanPage from "./pages/Artisanpage";
 import CustomerRequestPage from "./pages/CustomerRequestPage";
 import ListPage from "./pages/ListPage";
 import AuthGuard from "./guard/auth";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <>
       <BrowserRouter>
+        <ToastContainer position="top-right" limit={1} />
         <Routes>
           <Route path="/" element={<Index />}>
             <Route index element={<DashboardPage />} />

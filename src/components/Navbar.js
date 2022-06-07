@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const user = {
   name: "Tom Cook",
@@ -15,6 +16,7 @@ function Navbar() {
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("wesabiUser");
+    toast.success("successfully logged out");
     navigate("/");
   };
 
@@ -35,7 +37,7 @@ function Navbar() {
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
-                      <button className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium  ring-1 ring-myColor hover:bg-black hover:text-white">
+                      <button className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium  ring-1 ring-myColor hover:bg-myColor hover:text-slate-200">
                         Dashboard
                       </button>
                     </div>
@@ -45,7 +47,7 @@ function Navbar() {
                   <div className="ml-4 flex items-center md:ml-6">
                     <button
                       type="button"
-                      className="bg-myColor p-1 rounded-full hover:text-gray-400 text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                      className="bg-myColor p-1 rounded-full hover:text-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                     >
                       <span className="sr-only">View notifications</span>
                       <BellIcon className="h-6 w-6" aria-hidden="true" />

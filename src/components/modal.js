@@ -3,6 +3,7 @@ import { Store } from "../store";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function Modal({ open, setOpen, setClose, requestId }) {
   let [isLoading, setIsLoading] = useState(false);
@@ -35,16 +36,23 @@ export default function Modal({ open, setOpen, setClose, requestId }) {
         data
       )
       .then((response) => {
-        console.log(response.data);
         if (response.data.status) {
           setSubmitingText("Submitted");
+          toast.success("Feedback Submitted Successfully");
+          setFeedBackType("");
+          setFeedBack("");
           setIsLoading(false);
           setTimeout(() => {
             setClose();
           }, 3000);
+        } else {
+          toast.error("unable to submit feedback, retry");
         }
       })
       .catch((error) => {
+        setIsLoading(false);
+        let msg = error?.message ? error.message : "Internal Server Error";
+        toast.error(msg);
         console.log(error);
       });
   };
