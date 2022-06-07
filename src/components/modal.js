@@ -7,7 +7,8 @@ import { toast } from "react-toastify";
 
 export default function Modal({ open, setOpen, setClose, requestId }) {
   let [isLoading, setIsLoading] = useState(false);
-  const [feedbackType, setFeedBackType] = useState("type 1");
+  const [feedbackType, setFeedBackType] = useState("Yes");
+  const [opinion, setOpinion] = useState("Yes");
   const [feedback, setFeedBack] = useState("");
   let [submitingText, setSubmitingText] = useState("");
 
@@ -20,6 +21,10 @@ export default function Modal({ open, setOpen, setClose, requestId }) {
     setFeedBackType(event.target.value);
   };
 
+  const handleSelectedChangeOpinion = (event) => {
+    setOpinion(event.target.value);
+  };
+
   const handleSubmit = (evt) => {
     setIsLoading(true);
     setSubmitingText("Submitting...");
@@ -29,6 +34,7 @@ export default function Modal({ open, setOpen, setClose, requestId }) {
       user_id: wesabiUser?.id,
       feedback_type: feedbackType,
       feedback_comments: feedback,
+      opinion: opinion,
     };
     console.log(data);
     axios
@@ -149,10 +155,36 @@ export default function Modal({ open, setOpen, setClose, requestId }) {
                                   onChange={handleSelectedChange}
                                   className="appearance-none block  w-full  bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 >
-                                  <option value="type 1">type 1</option>
-                                  <option value="type 2">type 2</option>
-                                  <option value="type 3">type 3</option>
-                                  <option value="type 4">type 4</option>
+                                  <option value="Yes">Yes</option>
+                                  <option value="NO">No</option>
+                                  <option value="Busy">Busy</option>
+                                  <option value="Call-back">Call-back</option>
+                                  <option value="Not reachable">
+                                    Not reachable
+                                  </option>
+                                  <option value="Wrong">Wrong</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div className="flex flex-wrap -mx-3 mb-5">
+                              <div className="w-full px-3">
+                                <label
+                                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                  htmlFor="grid-password"
+                                >
+                                  Are you interested?
+                                </label>
+
+                                <select
+                                  onChange={handleSelectedChangeOpinion}
+                                  className="appearance-none block  w-full  bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                >
+                                  <option value="Yes">Yes</option>
+                                  <option value="NO">No</option>
+                                  <option value="Not ready">Not ready</option>
+                                  <option value="Physical Meeting">
+                                    Physical Meeting
+                                  </option>
                                 </select>
                               </div>
                             </div>
