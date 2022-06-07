@@ -104,7 +104,7 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full appearance-none block bg-gray-200 text-gray-700 border order-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                 id="grid-first-name"
-                type="text"
+                type="password"
                 placeholder="your password"
               />
             </div>

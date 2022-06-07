@@ -12,7 +12,8 @@ export default function Modal({ open, setOpen, setClose, requestId }) {
   let [submitingText, setSubmitingText] = useState("");
 
   const {
-    state: { wesabiUser },
+    state: { requests, wesabiUser },
+    dispatch,
   } = useContext(Store);
 
   const handleSelectedChange = (event) => {
@@ -37,6 +38,15 @@ export default function Modal({ open, setOpen, setClose, requestId }) {
       )
       .then((response) => {
         if (response.data.status) {
+          let newRequest = requests.map((r) =>
+            +r.id === +requestId
+              ? {
+                  ...r,
+                  feedback_provided: "1",
+                }
+              : r
+          );
+          dispatch({ type: "GET_REQUEST", payload: newRequest });
           setSubmitingText("Submitted");
           toast.success("Feedback Submitted Successfully");
           setFeedBackType("");
@@ -44,7 +54,7 @@ export default function Modal({ open, setOpen, setClose, requestId }) {
           setIsLoading(false);
           setTimeout(() => {
             setClose();
-          }, 3000);
+          }, 600000);
         } else {
           toast.error("unable to submit feedback, retry");
         }
