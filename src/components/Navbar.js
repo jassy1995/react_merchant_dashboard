@@ -30,8 +30,8 @@ function Navbar() {
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
                     <img
-                      className="h-8 w-8 text-white"
-                      src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+                      className="h-8 w-8 text-white rounded-full"
+                      src="assets/img/crlogo.png"
                       alt="Workflow"
                     />
                   </div>
