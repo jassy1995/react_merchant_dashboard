@@ -51,7 +51,8 @@ function ListPage() {
             <div className="flex justify-end  mb-2 pr-5 ">
               <button
                 onClick={pre_function}
-                className="border text-myColor font-bold py-2 px-2 mr-3"
+                className="border text-myColor font-bold py-2 px-2 mr-3 disabled:opacity-75 disabled:cursor-not-allowed"
+                disabled={start === 0}
               >
                 Previous
               </button>

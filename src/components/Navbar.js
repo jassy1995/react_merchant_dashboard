@@ -6,10 +6,11 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
+  name: "Admin",
+  email: "admin@gmail.com",
   imageUrl:
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzri64e5uqwijVhAvvNecVwmSmQdWmiJ4dpA&usqp=CAU",
+  // "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 
 function Navbar() {
@@ -30,7 +31,7 @@ function Navbar() {
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
                     <img
-                      className="h-8 w-8 text-white rounded-full"
+                      className="h-8 w-8 text-white bg-myColor-500 rounded-full"
                       src="assets/img/crlogo.png"
                       alt="Workflow"
                     />
@@ -65,7 +66,7 @@ function Navbar() {
                         </Menu.Button>
 
                         <Menu.Button
-                          className="font-bold text-red-500 bg-white py-1 px-2 rounded-full"
+                          className="font-bold text-red-500 bg-white py-1 px-2 rounded-full ml-2"
                           onClick={logout}
                         >
                           logout
@@ -140,7 +141,7 @@ function Navbar() {
                   <button
                     type="button"
                     onClick={logout}
-                    className="ml-auto bg-white flex-shrink-0 p-2 rounded-full text-red-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-white"
+                    className="ml-auto  bg-white flex-shrink-0 p-2 rounded-full text-red-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-white"
                   >
                     <span className="sr-only">View notifications</span>
                     logout
