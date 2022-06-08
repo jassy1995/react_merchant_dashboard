@@ -5,6 +5,6 @@ import { Store } from "../store";
 export default function AuthGuard({ children }) {
   const { state } = useContext(Store);
   const { wesabiUser } = state;
-  console.log(state);
+  console.log(wesabiUser);
   return wesabiUser ? children : <Navigate to="/" />;
 }

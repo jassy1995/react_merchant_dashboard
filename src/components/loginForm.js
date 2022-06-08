@@ -4,7 +4,7 @@ import axios from "axios";
 import { Store } from "../store";
 import { toast } from "react-toastify";
 
-function Login() {
+function LoginForm() {
   let [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,6 +29,7 @@ function Login() {
         console.log(response);
         console.log(response.data);
         setIsLoading(false);
+        setSubmitingText("");
         response.data.user &&
           localStorage.setItem(
             "wesabiUser",
@@ -42,7 +43,7 @@ function Login() {
           setPassword("");
           setTimeout(() => {
             setIsLoading(false);
-            navigate(`/list/${response.data.user.id}`);
+            navigate("/dashboard");
           }, 1000);
         } else {
           setIsLoading(false);
@@ -66,13 +67,17 @@ function Login() {
         <div className="flex flex-wrap  mb-3 mx-auto text-center mt-4">
           <div className="w-full flex justify-center ">
             {isLoading ? (
-              <h2 className="text-center text-green-500 text-2xl font-bold">
+              <h2 className="text-center text-green-500 text-2xl font-medium mb-4">
                 {submitingText}
               </h2>
             ) : (
-              <h2 className="text-center font-thin mb-4 text-2xl">
-                Sign in to your account
-              </h2>
+              <>
+                {!submitingText && (
+                  <h2 className="text-center font-thin mb-4 text-2xl">
+                    Sign in to your account
+                  </h2>
+                )}
+              </>
             )}
           </div>
           <div className="flex flex-col  space-y-6 mx-auto w-full items-center">
@@ -113,7 +118,7 @@ function Login() {
               <input
                 type="submit"
                 value={isLoading ? "logging.." : "login"}
-                className="w-full appearance-none block bg-myColor text-gray-700 border order-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none"
+                className="w-full appearance-none block bg-myColor text-gray-700 border order-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none font-medium"
                 style={{ color: "white" }}
               />
             </div>
@@ -124,4 +129,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginForm;

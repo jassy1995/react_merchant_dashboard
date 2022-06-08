@@ -1,8 +1,8 @@
 import React from "react";
 import { Popover } from "@headlessui/react";
-import Login from "../components/loginForm";
+import LoginForm from "../components/loginForm";
 
-function DashboardPage() {
+function LoginPage() {
   return (
     <div className="relative bg-white overflow-hidden mt-9 w-full">
       <div className="max-w-7xl mx-auto">
@@ -21,7 +21,7 @@ function DashboardPage() {
             <div className="relative pt-1 px-4 sm:px-6 lg:px-8"></div>
           </Popover>
           <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-            <Login />
+            <LoginForm />
           </main>
         </div>
       </div>
@@ -36,4 +36,4 @@ function DashboardPage() {
   );
 }
 
-export default DashboardPage;
+export default LoginPage;

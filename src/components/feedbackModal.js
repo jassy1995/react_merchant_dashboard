@@ -5,7 +5,7 @@ import { XIcon } from "@heroicons/react/outline";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default function Modal({ open, setOpen, setClose, requestId }) {
+export default function FeedbackModal({ open, setOpen, setClose, requestId }) {
   let [isLoading, setIsLoading] = useState(false);
   const [feedbackType, setFeedBackType] = useState("Yes");
   const [opinion, setOpinion] = useState("Yes");
@@ -60,7 +60,7 @@ export default function Modal({ open, setOpen, setClose, requestId }) {
           setIsLoading(false);
           setTimeout(() => {
             setClose();
-          }, 600000);
+          }, 1000);
         } else {
           toast.error("unable to submit feedback, retry");
         }

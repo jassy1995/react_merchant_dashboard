@@ -1,16 +1,20 @@
 import React, { useEffect, useContext } from "react";
-import TableItem from "../components/TableItem";
+
+import TableHistory from "../components/TableHistory";
 import { Store } from "../store";
 import axios from "axios";
 
-function ListPage() {
+function HistoryPage() {
   const {
     state: { start, loading, wesabiUser },
     dispatch,
   } = useContext(Store);
+
   const id = wesabiUser?.id;
+
   useEffect(() => {
     async function getCustomerRequestData() {
+      console.log(id);
       dispatch({ type: "START_FETCHING", payload: true });
       try {
         let startingPoint = start > -1 ? start : 0;
@@ -42,7 +46,7 @@ function ListPage() {
       <main className="overflow-auto mt-5">
         <div className="max-w-7xl mx-auto py-2 sm:px-6 lg:px-8 overflow-auto">
           <div className="px-4 py-2 sm:px-0">
-            <TableItem />
+            <TableHistory />
 
             {!loading && (
               <div className="flex justify-end  mb-2 pr-5 ">
@@ -68,4 +72,4 @@ function ListPage() {
   );
 }
 
-export default ListPage;
+export default HistoryPage;

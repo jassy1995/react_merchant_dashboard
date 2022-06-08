@@ -4,7 +4,7 @@ import FeedbackModal from "../components/feedbackModal";
 import DisplayInfo from "./empty";
 import { toast } from "react-toastify";
 
-function TableItem() {
+function TableHistory() {
   const {
     state: { requests, loading },
   } = useContext(Store);
@@ -157,4 +157,4 @@ function TableItem() {
   );
 }
 
-export default TableItem;
+export default TableHistory;

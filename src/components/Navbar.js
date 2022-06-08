@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Store } from "../store";
 
 const user = {
   name: "Admin",
@@ -15,9 +16,11 @@ const user = {
 
 function Navbar() {
   const navigate = useNavigate();
+  const { dispatch } = useContext(Store);
   const logout = () => {
     localStorage.removeItem("wesabiUser");
     toast.success("successfully logged out");
+    dispatch({ type: "SAVE_USER", payload: null });
     navigate("/");
   };
 
@@ -38,9 +41,16 @@ function Navbar() {
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
-                      <button className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium  ring-1 ring-myColor hover:bg-myColor hover:text-slate-200">
-                        Dashboard
-                      </button>
+                      <Link to="/dashboard">
+                        <button className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium  ring-1 ring-myColor hover:bg-myColor hover:text-slate-200">
+                          Dashboard
+                        </button>
+                      </Link>
+                      <Link to="/dashboard/history">
+                        <button className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium  ring-1 ring-myColor hover:bg-myColor hover:text-slate-200">
+                          History
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -91,7 +101,7 @@ function Navbar() {
                   </div>
                 </div>
                 <div className="-mr-2 flex md:hidden">
-                  <Disclosure.Button className="bg-myColor inline-flex items-center justify-center p-2 rounded-md text-white-400 hover:text-white hover:bg-myColor focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                  <Disclosure.Button className="bg-myColor inline-flex  text-white items-center justify-center p-2 rounded-md text-white-400 hover:text-white hover:bg-myColor focus:outline-none focus:ring-1 focus:p-1 focus:ring-offset-1 focus:ring-offset-gray-200 focus:ring-white">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -110,7 +120,7 @@ function Navbar() {
                   className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium mhover:text-gray-300 hover:bg-myColor hover:text-white"
                   aria-current="page"
                 >
-                  Dashboard
+                  Dashboardkkkk
                 </Disclosure.Button>
               </div>
               <div className="pt-4 pb-3 border-t border-white">
@@ -126,13 +136,13 @@ function Navbar() {
                     <div className="text-base font-medium leading-none text-white">
                       {user.name}
                     </div>
-                    <div className="text-sm font-medium leading-none text-gray-400">
+                    <div className="text-sm font-thin leading-none text-white ">
                       {user.email}
                     </div>
                   </div>
                   <button
                     type="button"
-                    className="ml-auto bg-white flex-shrink-0 p-1 rounded-full text-red-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-white"
+                    className="ml-auto bg-white flex-shrink-0 p-1 rounded-full text-red-500 hover:text-red-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-white"
                   >
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
@@ -141,18 +151,11 @@ function Navbar() {
                   <button
                     type="button"
                     onClick={logout}
-                    className="ml-auto  bg-white flex-shrink-0 p-2 rounded-full text-red-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-white"
+                    className="ml-auto  bg-white flex-shrink-0 p-1 rounded-full text-red-500 hover:text-red-300 text-sm focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-offset-white focus:ring-white"
                   >
                     <span className="sr-only">View notifications</span>
                     logout
                   </button>
-                </div>
-                <div className="mt-3 px-2 space-y-1">
-                  <Disclosure.Button
-                    as="a"
-                    href="/login"
-                    className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-white hover:bg-gray-700"
-                  ></Disclosure.Button>
                 </div>
               </div>
             </Disclosure.Panel>
