@@ -9,6 +9,7 @@ import ArtisanPage from "./pages/Artisanpage";
 import CustomerRequestPage from "./pages/CustomerRequestPage";
 import ListPage from "./pages/ListPage";
 import HistoryPage from "./pages/HistoryPage";
+import MyHistoryPage from "./pages/MyHistoryPage";
 import AuthGuard from "./guard/auth";
 import AdminGuard from "./guard/admin";
 import "react-toastify/dist/ReactToastify.css";
@@ -40,6 +41,14 @@ function App() {
                 <AdminGuard>
                   <HistoryPage />
                 </AdminGuard>
+              }
+            ></Route>
+            <Route
+              path="/dashboard/history/myrecord"
+              element={
+                <AuthGuard>
+                  <MyHistoryPage />
+                </AuthGuard>
               }
             ></Route>
             <Route path="*" element={<NotFound />} />

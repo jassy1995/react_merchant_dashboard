@@ -7,13 +7,16 @@ const initialState = {
   customers: [],
   requests: [],
   histories: [],
+  myHistories: [],
   start: 0,
   start2: 0,
+  start3: 0,
   filterValue: "yes",
   loading: false,
   wesabiUser: localStorage.getItem("wesabiUser")
     ? JSON.parse(localStorage.getItem("wesabiUser"))
     : null,
+  isAdmin: false,
 };
 
 function reducer(state, action) {
@@ -22,11 +25,10 @@ function reducer(state, action) {
       return { ...state, loading: action.payload };
     case "END_FETCHING":
       return { ...state, loading: action.payload };
-    case "GET_SKILL":
+    case "UPDATE_ADMIN":
       return {
         ...state,
-        skills: [...state.skills, ...action.payload],
-        loading: false,
+        isAdmin: action.payload,
       };
     case "UPDATE_FILTER":
       return {
@@ -38,6 +40,11 @@ function reducer(state, action) {
       return {
         ...state,
         histories: action.payload,
+      };
+    case "UPDATE_MY_HISTORY":
+      return {
+        ...state,
+        myHistories: action.payload,
       };
     case "GET_REQUEST":
       return {
@@ -58,6 +65,10 @@ function reducer(state, action) {
       return { ...state, start2: action.payload };
     case "REDUCE_START2":
       return { ...state, start2: action.payload };
+    case "INCREASE_START3":
+      return { ...state, start3: action.payload };
+    case "REDUCE_START3":
+      return { ...state, start3: action.payload };
     default:
       return state;
   }

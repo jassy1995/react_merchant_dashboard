@@ -16,7 +16,8 @@ const user = {
 
 function Navbar() {
   const navigate = useNavigate();
-  const { dispatch } = useContext(Store);
+  const { state, dispatch } = useContext(Store);
+  const { isAdmin } = state;
   const logout = () => {
     localStorage.removeItem("wesabiUser");
     toast.success("successfully logged out");
@@ -46,11 +47,21 @@ function Navbar() {
                           Dashboard
                         </button>
                       </Link>
-                      <Link to="/dashboard/history">
-                        <button className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium  ring-1 ring-myColor hover:bg-myColor hover:text-slate-200">
-                          History
-                        </button>
-                      </Link>
+                      {isAdmin && (
+                        <Link to="/dashboard/history">
+                          <button className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium  ring-1 ring-myColor hover:bg-myColor hover:text-slate-200">
+                            History
+                          </button>
+                        </Link>
+                      )}
+
+                      {!isAdmin && (
+                        <Link to="/dashboard/history/myrecord">
+                          <button className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium  ring-1 ring-myColor hover:bg-myColor hover:text-slate-200">
+                            History
+                          </button>
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </div>
