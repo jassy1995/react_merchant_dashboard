@@ -5,7 +5,7 @@ import axios from "axios";
 
 function ListPage() {
   const {
-    state: { start, loading, wesabiUser },
+    state: { start, loading, wesabiUser, requests },
     dispatch,
   } = useContext(Store);
   const id = wesabiUser?.id;
@@ -55,7 +55,8 @@ function ListPage() {
                 </button>
                 <button
                   onClick={next_function}
-                  className="border text-myColor font-bold  py-2 px-2"
+                  className="border text-myColor font-bold  py-2 px-2 disabled:opacity-75 disabled:cursor-not-allowed"
+                  disabled={requests.length < 20}
                 >
                   Next
                 </button>

@@ -6,7 +6,10 @@ const initialState = {
   unSkills: [],
   customers: [],
   requests: [],
+  histories: [],
   start: 0,
+  start2: 0,
+  filterValue: "yes",
   loading: false,
   wesabiUser: localStorage.getItem("wesabiUser")
     ? JSON.parse(localStorage.getItem("wesabiUser"))
@@ -25,16 +28,16 @@ function reducer(state, action) {
         skills: [...state.skills, ...action.payload],
         loading: false,
       };
-    case "GET_UNSKILL":
+    case "UPDATE_FILTER":
       return {
         ...state,
-        unSkills: [...state.unSkills, ...action.payload],
+        filterValue: action.payload,
         loading: false,
       };
-    case "GET_CUSTOMER":
+    case "UPDATE_HISTORY":
       return {
         ...state,
-        customers: action.payload,
+        histories: action.payload,
       };
     case "GET_REQUEST":
       return {
@@ -51,6 +54,10 @@ function reducer(state, action) {
       return { ...state, start: action.payload };
     case "REDUCE_START":
       return { ...state, start: action.payload };
+    case "INCREASE_START2":
+      return { ...state, start2: action.payload };
+    case "REDUCE_START2":
+      return { ...state, start2: action.payload };
     default:
       return state;
   }

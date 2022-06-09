@@ -7,8 +7,8 @@ import { toast } from "react-toastify";
 
 export default function FeedbackModal({ open, setOpen, setClose, requestId }) {
   let [isLoading, setIsLoading] = useState(false);
-  const [feedbackType, setFeedBackType] = useState("Yes");
-  const [opinion, setOpinion] = useState("Yes");
+  const [feedbackType, setFeedBackType] = useState("yes");
+  const [opinion, setOpinion] = useState("yes");
   const [feedback, setFeedBack] = useState("");
   let [submitingText, setSubmitingText] = useState("");
 
@@ -155,14 +155,17 @@ export default function FeedbackModal({ open, setOpen, setClose, requestId }) {
                                   onChange={handleSelectedChange}
                                   className="appearance-none block  w-full  bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 >
-                                  <option value="Yes">Yes</option>
-                                  <option value="NO">No</option>
-                                  <option value="Busy">Busy</option>
-                                  <option value="Call-back">Call-back</option>
-                                  <option value="Not reachable">
+                                  <option value="yes">Yes</option>
+                                  <option value="no">No</option>
+                                  <option value="busy">Busy</option>
+                                  <option value="call-back">Call-back</option>
+                                  <option value="not reachable">
                                     Not reachable
                                   </option>
-                                  <option value="Wrong">Wrong</option>
+                                  <option value="wrong number">
+                                    Wrong number
+                                  </option>
+                                  <option value="no answer">No answer</option>
                                 </select>
                               </div>
                             </div>
@@ -179,10 +182,10 @@ export default function FeedbackModal({ open, setOpen, setClose, requestId }) {
                                   onChange={handleSelectedChangeOpinion}
                                   className="appearance-none block  w-full  bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 >
-                                  <option value="Yes">Yes</option>
-                                  <option value="NO">No</option>
-                                  <option value="Not ready">Not ready</option>
-                                  <option value="Physical Meeting">
+                                  <option value="yes">Yes</option>
+                                  <option value="no">No</option>
+                                  <option value="not ready">Not ready</option>
+                                  <option value="physical meeting">
                                     Physical Meeting
                                   </option>
                                 </select>

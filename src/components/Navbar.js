@@ -115,13 +115,16 @@ function Navbar() {
 
             <Disclosure.Panel className="md:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <Disclosure.Button
-                  as="a"
-                  className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium mhover:text-gray-300 hover:bg-myColor hover:text-white"
-                  aria-current="page"
-                >
-                  Dashboardkkkk
-                </Disclosure.Button>
+                <Link to="/dashboard">
+                  <button className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium mhover:text-gray-300 hover:bg-myColor hover:text-white">
+                    Dashboard
+                  </button>
+                </Link>
+                <Link to="/dashboard/history">
+                  <button className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium mhover:text-gray-300 hover:bg-myColor hover:text-white">
+                    History
+                  </button>
+                </Link>
               </div>
               <div className="pt-4 pb-3 border-t border-white">
                 <div className="flex items-center px-5">

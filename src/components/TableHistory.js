@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 function TableHistory() {
   const {
-    state: { requests, loading },
+    state: { histories, loading },
   } = useContext(Store);
 
   const [requestId, setRequestId] = useState(null);
@@ -46,7 +46,7 @@ function TableHistory() {
       />
       {loading ? (
         <DisplayInfo children="Loading..." />
-      ) : requests.length === 0 && !loading ? (
+      ) : histories.length === 0 && !loading ? (
         <DisplayInfo children="No Request" />
       ) : (
         <div className="flex flex-col">
@@ -58,50 +58,56 @@ function TableHistory() {
                     <tr>
                       <th
                         scope="col"
-                        className="text-sm font-medium text-gray-900 px-6 py-4 text-left border  border-slate-300"
+                        className="text-sm font-medium text-blue-500 px-6 py-4 text-left border  border-slate-300"
                       >
                         s/n
                       </th>
                       <th
                         scope="col"
-                        className="text-sm font-medium text-gray-900 px-6 py-4 text-left border  border-slate-300"
+                        className="text-sm font-medium text-blue-500 px-6 py-4 text-center border  border-slate-300"
                       >
-                        name
+                        store name
                       </th>
                       <th
                         scope="col"
-                        className="text-sm font-medium text-gray-900 px-6 py-4 text-left border  border-slate-300"
+                        className="text-sm font-medium text-blue-500 px-6 py-4 text-center border  border-slate-300"
                       >
                         phone
                       </th>
                       <th
                         scope="col"
-                        className="text-sm font-medium text-gray-900 px-6 py-4 text-left border  border-slate-300"
+                        className="text-sm font-medium text-blue-500 px-6 py-4 text-left border  border-slate-300"
                       >
-                        Store link
+                        marketer name
                       </th>
                       <th
                         scope="col"
-                        className="text-sm font-medium text-gray-900 px-6 py-4 text-lef border  border-slate-300"
+                        className="text-sm font-medium text-blue-500 px-6 py-4 text-left border  border-slate-300"
                       >
-                        Reset password link
+                        feedback type
                       </th>
                       <th
                         scope="col"
-                        className="text-sm font-medium text-gray-900 px-6 py-4 text-left border  border-slate-300"
+                        className="text-sm font-medium text-blue-500 px-6 py-4 text-left border  border-slate-300"
                       >
-                        feedback
+                        feedback_comments
                       </th>
                       <th
                         scope="col"
-                        className="text-sm font-medium text-gray-900 px-6 py-4 text-center  border border-slate-300"
+                        className="text-sm font-medium text-blue-500 px-6 py-4 text-left border  border-slate-300"
+                      >
+                        opinion
+                      </th>
+                      <th
+                        scope="col"
+                        className="text-sm font-medium text-blue-500 px-6 py-4 text-center  border border-slate-300"
                       >
                         date
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    {requests.map((request, index) => (
+                    {histories.map((request, index) => (
                       <tr key={index} className="border-b">
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border border-slate-300">
                           {index + 1}
@@ -114,35 +120,19 @@ function TableHistory() {
                         </td>
 
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border border-slate-300">
-                          {request?.store_link}
+                          {request?.telemarketername}
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border border-slate-300">
-                          <button
-                            onClick={() => copyLink(request.phone)}
-                            className="bg-yellow-500 px-2 py-1 text-white text-sm font-medium rounded-lg"
-                          >
-                            copy link
-                          </button>
+                          {request?.feedback_type}
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-normal border border-slate-300">
+                          {request?.feedback_comments}
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border border-slate-300">
-                          <button
-                            className={
-                              request?.feedback_provided?.toString() === "1"
-                                ? "bg-green-500 px-2 py-1 text-white text-sm font-medium rounded-lg"
-                                : "bg-red-500 px-2 py-1 text-white text-sm font-medium rounded-lg"
-                            }
-                            onClick={() =>
-                              giveFeedback(
-                                request.id,
-                                request.feedback_provided
-                              )
-                            }
-                          >
-                            feedback
-                          </button>
+                          {request?.opinion}
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border border-slate-300">
-                          {request?.created_at}
+                          {request?.feedback_date}
                         </td>
                       </tr>
                     ))}
