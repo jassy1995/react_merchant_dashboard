@@ -131,11 +131,20 @@ function Navbar() {
                     Dashboard
                   </button>
                 </Link>
-                <Link to="/dashboard/history">
-                  <button className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium mhover:text-gray-300 hover:bg-myColor hover:text-white">
-                    History
-                  </button>
-                </Link>
+                {isAdmin && (
+                  <Link to="/dashboard/history">
+                    <button className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium mhover:text-gray-300 hover:bg-myColor hover:text-white">
+                      History
+                    </button>
+                  </Link>
+                )}
+                {!isAdmin && (
+                  <Link to="/dashboard/history/myrecord">
+                    <button className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium mhover:text-gray-300 hover:bg-myColor hover:text-white">
+                      History
+                    </button>
+                  </Link>
+                )}
               </div>
               <div className="pt-4 pb-3 border-t border-white">
                 <div className="flex items-center px-5">
