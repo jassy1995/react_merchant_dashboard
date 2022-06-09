@@ -60,7 +60,9 @@ function LoginForm() {
         }
       })
       .catch((error) => {
-        let msg = error?.message ? error.message : "Internal Server Error";
+        let msg = error?.message
+          ? error.message
+          : "no or poor internet connection, try it again";
         setIsLoading(false);
         toast.error(msg);
         console.log(error);

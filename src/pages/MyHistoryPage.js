@@ -3,6 +3,7 @@ import React, { useEffect, useContext } from "react";
 import MyTableHistory from "../components/MyTableHistory";
 import { Store } from "../store";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function MyHistoryPage() {
   const {
@@ -28,6 +29,10 @@ function MyHistoryPage() {
         dispatch({ type: "END_FETCHING", payload: false });
       } catch (error) {
         dispatch({ type: "END_FETCHING", payload: false });
+        let msg = error?.message
+          ? error.message
+          : "no or poor internet connection, try it again";
+        toast.error(msg);
         console.log(error);
       }
     }

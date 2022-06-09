@@ -5,10 +5,5 @@ import { Store } from "../store";
 export default function AuthGuard({ children }) {
   const { state } = useContext(Store);
   const { wesabiUser } = state;
-  // if (wesabiUser) {
-  //   if (Number(wesabiUser.id) === 35011 || Number(wesabiUser.id) === 35010) {
-  //     dispatch({ type: "UPDATE_ADMIN", payload: true });
-  //   }
-  // }
   return wesabiUser ? children : <Navigate to="/" />;
 }
