@@ -5,7 +5,6 @@ import { Store } from "../store";
 import axios from "axios";
 
 function HistoryPage() {
-  // const [feedbackType, setFeedBackType] = useState("");
   const {
     state: { start2, loading, wesabiUser, filterValue, histories },
     dispatch,
@@ -14,7 +13,6 @@ function HistoryPage() {
   const id = wesabiUser?.id;
 
   useEffect(() => {
-    // console.log(feedbackType);
     async function getCustomerRequestData() {
       console.log(id);
       dispatch({ type: "START_FETCHING", payload: true });

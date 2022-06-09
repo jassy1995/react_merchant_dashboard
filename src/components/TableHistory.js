@@ -1,49 +1,15 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Store } from "../store";
-import FeedbackModal from "../components/feedbackModal";
+
 import DisplayInfo from "./empty";
-import { toast } from "react-toastify";
 
 function TableHistory() {
   const {
     state: { histories, loading },
   } = useContext(Store);
 
-  const [requestId, setRequestId] = useState(null);
-  const [open, setOpen] = useState(false);
-
-  const giveFeedback = (id, checkFeedback) => {
-    console.log(checkFeedback);
-    if (checkFeedback?.toString() === "0") {
-      setRequestId(id);
-      setOpen(true);
-    } else return;
-  };
-
-  const closeModal = () => {
-    setOpen(false);
-  };
-
-  const copyLink = (phone) => {
-    let link = `https://merchants.creditclan.com/forgot-password?identity=${phone}`;
-    const input = document.createElement("input");
-    input.value = link;
-    document.body.appendChild(input);
-    input.select();
-    input.setSelectionRange(0, 99999);
-    document.execCommand("copy");
-    toast.success("Link copied to clipboard");
-    input.remove();
-  };
-
   return (
     <>
-      <FeedbackModal
-        open={open}
-        setOpen={setOpen}
-        setClose={closeModal}
-        requestId={requestId}
-      />
       {loading ? (
         <DisplayInfo children="Loading..." />
       ) : histories.length === 0 && !loading ? (
