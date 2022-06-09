@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Store } from "../store";
+import { toast } from "react-toastify";
 
 function NotFound() {
   const navigate = useNavigate();
@@ -22,7 +23,9 @@ function NotFound() {
 
   const logout = () => {
     localStorage.removeItem("wesabiUser");
+    toast.success("successfully logged out");
     dispatch({ type: "SAVE_USER", payload: null });
+    dispatch({ type: "UPDATE_ADMIN", payload: false });
     navigate("/");
   };
   return (

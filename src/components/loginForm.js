@@ -36,14 +36,23 @@ function LoginForm() {
             JSON.stringify(response.data.user)
           );
         dispatch({ type: "SAVE_USER", payload: response.data.user });
+
         if (response.data.status) {
+          let pathDirection = "/dashboard";
+          if (
+            Number(response.data.user.id) === 35011 ||
+            Number(response.data.user.id) === 35010
+          ) {
+            dispatch({ type: "UPDATE_ADMIN", payload: true });
+            pathDirection = "/dashboard/history";
+          }
           toast.success("successfully logged in");
           setSubmitingText("logged In");
           setEmail("");
           setPassword("");
           setTimeout(() => {
             setIsLoading(false);
-            navigate("/dashboard");
+            navigate(pathDirection);
           }, 1000);
         } else {
           setIsLoading(false);
@@ -118,7 +127,7 @@ function LoginForm() {
               <input
                 type="submit"
                 value={isLoading ? "logging.." : "login"}
-                className="w-full appearance-none block bg-myColor text-gray-700 border order-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none font-medium"
+                className="w-full appearance-none block bg-myColor text-gray-700 border order-gray-200 rounded py-3 px-4 mb-3 leading-tight cursor-pointer focus:outline-none font-medium"
                 style={{ color: "white" }}
               />
             </div>

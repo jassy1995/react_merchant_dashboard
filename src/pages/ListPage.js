@@ -14,11 +14,13 @@ function ListPage() {
       dispatch({ type: "START_FETCHING", payload: true });
       try {
         let startingPoint = start > -1 ? start : 0;
+        console.log(startingPoint);
         const { data } = await axios.post(
           `https://sellbackend.creditclan.com/parent/index.php/globalrequest/getmerchants/${startingPoint}`,
-          { user_id: id }
+          { user_id: +id }
         );
         console.log(data.data);
+        console.log(id);
         dispatch({ type: "GET_REQUEST", payload: data.data });
         dispatch({ type: "END_FETCHING", payload: false });
       } catch (error) {
@@ -44,7 +46,7 @@ function ListPage() {
           <div className="px-4 py-2 sm:px-0">
             <TableItem />
 
-            {!loading && (
+            {!loading && requests.length > 0 && (
               <div className="flex justify-end  mb-2 pr-5 ">
                 <button
                   onClick={pre_function}
