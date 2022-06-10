@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Popover } from "@headlessui/react";
 import LoginForm from "../components/loginForm";
+import { Store } from "../store";
 
 function LoginPage() {
+  const {
+    state: { wesabiUser, isAdmin },
+  } = useContext(Store);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (wesabiUser && isAdmin) {
+      navigate("/dashboard/history");
+    }
+    if (wesabiUser && !isAdmin) {
+      navigate("/dashboard");
+    }
+  }, [wesabiUser, isAdmin, navigate]);
+
   return (
     <div className="relative bg-white overflow-hidden mt-9 w-full">
       <div className="max-w-7xl mx-auto">

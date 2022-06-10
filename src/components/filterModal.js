@@ -108,7 +108,7 @@ export default function FilterModal({ open, setOpen, setClose }) {
                                     className="w-full form-select form-select-sm mb-3 appearance-none block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     aria-label=".form-select-lg example"
                                   >
-                                    <option defaultValue>filter option</option>
+                                    <option defaultValue>select...</option>
                                     <option value="yes">Yes</option>
                                     <option value="no">No</option>
                                     <option value="busy">Busy</option>
@@ -130,15 +130,17 @@ export default function FilterModal({ open, setOpen, setClose }) {
                                 <h3 className="font-mono font-bold text-slate-700">
                                   filter by :
                                 </h3>
-                                <div className="mt-4 flex flex-col space-y-4 md:flex-row space-x-4 md:space-x-2 md:space-y-0">
+                                <div className="mt-4 flex flex-col space-y-6">
                                   <div className="flex flex-col space-y-1">
-                                    <div className="text-md ml-1">feedback</div>
+                                    <div className="text-md ml-1 font-thin">
+                                      feedback
+                                    </div>
                                     <select
                                       onChange={handleSelectedFeedbackSearch}
                                       className="w-full form-select form-select-sm mb-3 appearance-none block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                       aria-label=".form-select-lg example"
                                     >
-                                      <option defaultValue>select</option>
+                                      <option defaultValue>select...</option>
                                       <option value="yes">Yes</option>
                                       <option value="no">No</option>
                                       <option value="busy">Busy</option>
@@ -158,7 +160,7 @@ export default function FilterModal({ open, setOpen, setClose }) {
                                   </div>
 
                                   <div className="flex flex-col space-y-1">
-                                    <div className="text-md ml-1">
+                                    <div className="text-md ml-1 font-thin">
                                       marketer name
                                     </div>
                                     <select
@@ -166,7 +168,7 @@ export default function FilterModal({ open, setOpen, setClose }) {
                                       className="w-full form-select form-select-sm mb-3 appearance-none block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none md:w-full"
                                       aria-label=".form-select-lg example"
                                     >
-                                      <option defaultValue>select</option>
+                                      <option defaultValue>select...</option>
                                       {marketers?.map((mark, index) => (
                                         <option key={index} value={mark.name}>
                                           {mark.name}
@@ -176,7 +178,9 @@ export default function FilterModal({ open, setOpen, setClose }) {
                                   </div>
                                 </div>
                                 <div className="flex flex-col space-y-1 mt-4">
-                                  <div className="text-md">date</div>
+                                  <div className="text-md ml-1 font-thin">
+                                    date
+                                  </div>
                                   <input
                                     type="date"
                                     onChange={(e) => handleDateUpdate(e)}
