@@ -11,12 +11,19 @@ const initialState = {
   start: 0,
   start2: 0,
   start3: 0,
+  start4: 0,
   filterValue: "yes",
+  filteredHistories: [],
+  marketers: [],
+  filterFeedback: "",
+  filterName: "",
+  filterDate: "",
+  fetchHistory: false,
   loading: false,
   wesabiUser: localStorage.getItem("wesabiUser")
     ? JSON.parse(localStorage.getItem("wesabiUser"))
     : null,
-  isAdmin: false,
+  isAdmin: localStorage.getItem("isAdmin") || false,
 };
 
 function reducer(state, action) {
@@ -25,15 +32,37 @@ function reducer(state, action) {
       return { ...state, loading: action.payload };
     case "END_FETCHING":
       return { ...state, loading: action.payload };
+    case "RESET_FILTER":
+      return {
+        ...state,
+        filterValue: "",
+        filterFeedback: action.payload.feedback,
+        filterName: action.payload.marketer,
+        filterDate: action.payload.date,
+      };
+    case "UPDATE_MARKETER":
+      return {
+        ...state,
+        marketers: action.payload,
+      };
+
     case "UPDATE_ADMIN":
       return {
         ...state,
         isAdmin: action.payload,
       };
+    case "UPDATE_FILTERED_HISTORIES":
+      return {
+        ...state,
+        filteredHistories: action.payload,
+      };
     case "UPDATE_FILTER":
       return {
         ...state,
         filterValue: action.payload,
+        filterFeedback: "",
+        filterName: "",
+        filterDate: "",
         loading: false,
       };
     case "UPDATE_HISTORY":
@@ -69,6 +98,10 @@ function reducer(state, action) {
       return { ...state, start3: action.payload };
     case "REDUCE_START3":
       return { ...state, start3: action.payload };
+    case "INCREASE_START4":
+      return { ...state, start4: action.payload };
+    case "REDUCE_START4":
+      return { ...state, start4: action.payload };
     default:
       return state;
   }

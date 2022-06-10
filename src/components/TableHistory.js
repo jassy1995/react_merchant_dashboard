@@ -7,7 +7,7 @@ function TableHistory() {
   const {
     state: { histories, loading },
   } = useContext(Store);
-
+  console.log(histories);
   return (
     <>
       {loading ? (

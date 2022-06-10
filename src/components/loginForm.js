@@ -30,11 +30,14 @@ function LoginForm() {
         console.log(response.data);
         setIsLoading(false);
         setSubmitingText("");
-        response.data.user &&
+        if (response?.data?.user) {
           localStorage.setItem(
             "wesabiUser",
             JSON.stringify(response.data.user)
           );
+          localStorage.setItem("isAdmin", true);
+        }
+
         dispatch({ type: "SAVE_USER", payload: response.data.user });
 
         if (response.data.status) {

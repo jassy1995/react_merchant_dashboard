@@ -23,6 +23,7 @@ function NotFound() {
 
   const logout = () => {
     localStorage.removeItem("wesabiUser");
+    localStorage.removeItem("isAdmin");
     toast.success("successfully logged out");
     dispatch({ type: "SAVE_USER", payload: null });
     dispatch({ type: "UPDATE_ADMIN", payload: false });
