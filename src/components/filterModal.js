@@ -3,41 +3,12 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { Store } from "../store";
 
-const products = [
-  {
-    id: 1,
-    name: "Throwback Hip Bag",
-    href: "#",
-    color: "Salmon",
-    price: "$90.00",
-    quantity: 1,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg",
-    imageAlt:
-      "Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.",
-  },
-  {
-    id: 2,
-    name: "Medium Stuff Satchel",
-    href: "#",
-    color: "Blue",
-    price: "$32.00",
-    quantity: 1,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
-    imageAlt:
-      "Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
-  },
-  // More products...
-];
-
 export default function FilterModal({ open, setOpen, setClose }) {
   const { state, dispatch } = useContext(Store);
   const { marketers } = state;
   const [searchFeedback, setSearchFeedback] = useState("");
   const [dateValue, setDateValue] = useState(null);
   const [marketer, setMarketer] = useState("");
-  const [feedbackType, setFeedBackType] = useState("yes");
 
   const handleDateUpdate = (e) => {
     const dateValue = e.target.value;
@@ -59,7 +30,6 @@ export default function FilterModal({ open, setOpen, setClose }) {
   };
 
   const handleSelectedChange = (event) => {
-    setFeedBackType(event.target.value);
     dispatch({ type: "UPDATE_FILTER", payload: event.target.value });
     setClose();
   };

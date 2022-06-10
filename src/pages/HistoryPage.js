@@ -19,7 +19,7 @@ function HistoryPage() {
       filterFeedback,
       filterName,
       filterDate,
-      filteredHistories,
+    
       start4,
     },
     dispatch,
@@ -154,25 +154,7 @@ function HistoryPage() {
                 />
               </div>
             </div>
-            {/* <div className="flex justify-end">
-              <span className="pt-4 mr-2 font-mono text-sm">
-                Filter By Feedback Type
-              </span>
-              <select
-                onChange={handleSelectedChange}
-                className="form-select form-select-sm mb-3 appearance-none block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                aria-label=".form-select-lg example"
-              >
-                <option defaultValue>filter</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-                <option value="busy">Busy</option>
-                <option value="call-back">Call-back</option>
-                <option value="not reachable">Not reachable</option>
-                <option value="wrong number">Wrong number</option>
-                <option value="no answer">No answer</option>
-              </select>
-            </div> */}
+           
             <TableHistory />
             {!loading && histories.length > 0 && (
               <div className="flex justify-end  mb-2 pr-5 ">
