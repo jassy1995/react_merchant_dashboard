@@ -28,6 +28,14 @@ function App() {
             <Route path="artisan" element={<ArtisanPage />} />
             <Route path="customer" element={<CustomerRequestPage />} />
             <Route
+              path="/test"
+              element={
+                <AuthGuard>
+                  <SkillPage />
+                </AuthGuard>
+              }
+            ></Route>
+            <Route
               path="/dashboard"
               element={
                 <AuthGuard>

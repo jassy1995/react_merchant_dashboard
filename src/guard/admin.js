@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { Store } from "../store";
 
 export default function AdminGuard({ children }) {
@@ -7,5 +7,10 @@ export default function AdminGuard({ children }) {
   const { wesabiUser, isAdmin } = state;
   console.log(wesabiUser);
   console.log(isAdmin);
-  return wesabiUser && isAdmin ? children : <Navigate to="/" />;
+  let location = useLocation();
+  return wesabiUser && isAdmin ? (
+    children
+  ) : (
+    <Navigate to="/" state={{ from: location }} replace />
+  );
 }

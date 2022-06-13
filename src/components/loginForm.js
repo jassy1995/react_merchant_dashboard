@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { Store } from "../store";
 import { toast } from "react-toastify";
@@ -13,6 +13,7 @@ function LoginForm() {
   const { dispatch } = useContext(Store);
 
   let navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = (evt) => {
     setIsLoading(true);
@@ -41,13 +42,15 @@ function LoginForm() {
         dispatch({ type: "SAVE_USER", payload: response.data.user });
 
         if (response.data.status) {
-          let pathDirection = "/dashboard";
+          let pathDirection = location.state?.from?.pathname || "/dashboard";
           if (
             Number(response.data.user.id) === 35011 ||
             Number(response.data.user.id) === 35010
           ) {
             dispatch({ type: "UPDATE_ADMIN", payload: true });
-            pathDirection = "/dashboard/history";
+
+            pathDirection =
+              location.state?.from?.pathname || "/dashboard/history";
           }
           toast.success("successfully logged in");
           setSubmitingText("logged In");
@@ -55,7 +58,7 @@ function LoginForm() {
           setPassword("");
           setTimeout(() => {
             setIsLoading(false);
-            navigate(pathDirection);
+            navigate(pathDirection, { replace: true });
           }, 1000);
         } else {
           setIsLoading(false);
