@@ -17,7 +17,7 @@ const user = {
 function Navbar() {
   const navigate = useNavigate();
   const { state, dispatch } = useContext(Store);
-  const { isAdmin } = state;
+  const { isAdmin, wesabiUser } = state;
   const logout = () => {
     localStorage.removeItem("wesabiUser");
     localStorage.removeItem("isAdmin");
@@ -44,14 +44,14 @@ function Navbar() {
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
-                      {!isAdmin && (
+                      {!isAdmin && wesabiUser && (
                         <Link to="/dashboard">
                           <button className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium  ring-1 ring-myColor hover:bg-myColor hover:text-slate-200">
                             Dashboard
                           </button>
                         </Link>
                       )}
-                      {isAdmin && (
+                      {isAdmin && wesabiUser && (
                         <Link to="/dashboard/history">
                           <button className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium  ring-1 ring-myColor hover:bg-myColor hover:text-slate-200">
                             History
@@ -59,7 +59,7 @@ function Navbar() {
                         </Link>
                       )}
 
-                      {!isAdmin && (
+                      {!isAdmin && wesabiUser && (
                         <Link to="/dashboard/history/myrecord">
                           <button className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium  ring-1 ring-myColor hover:bg-myColor hover:text-slate-200">
                             History
