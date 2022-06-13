@@ -9,6 +9,7 @@ function LoginPage() {
     state: { wesabiUser, isAdmin },
   } = useContext(Store);
   const navigate = useNavigate();
+
   useEffect(() => {
     if (wesabiUser && isAdmin) {
       navigate("/dashboard/history");
