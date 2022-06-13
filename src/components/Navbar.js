@@ -59,14 +59,6 @@ function Navbar() {
                         </Link>
                       )}
 
-                      {isAdmin && (
-                        <Link to="/test">
-                          <button className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium  ring-1 ring-myColor hover:bg-myColor hover:text-slate-200">
-                            Test
-                          </button>
-                        </Link>
-                      )}
-
                       {!isAdmin && (
                         <Link to="/dashboard/history/myrecord">
                           <button className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium  ring-1 ring-myColor hover:bg-myColor hover:text-slate-200">
