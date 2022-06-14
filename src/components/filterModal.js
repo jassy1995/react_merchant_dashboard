@@ -170,7 +170,7 @@ export default function FilterModal({ open, setOpen, setClose }) {
                                     >
                                       <option defaultValue>select...</option>
                                       {marketers?.map((mark, index) => (
-                                        <option key={index} value={mark.name}>
+                                        <option key={index} value={mark.id}>
                                           {mark.name}
                                         </option>
                                       ))}

@@ -130,21 +130,21 @@ function Navbar() {
 
             <Disclosure.Panel className="md:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                {!isAdmin && (
+                {!isAdmin && wesabiUser && (
                   <Link to="/dashboard">
                     <button className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium mhover:text-gray-300 hover:bg-myColor hover:text-white">
                       Dashboard
                     </button>
                   </Link>
                 )}
-                {isAdmin && (
+                {isAdmin && wesabiUser && (
                   <Link to="/dashboard/history">
                     <button className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium mhover:text-gray-300 hover:bg-myColor hover:text-white">
                       History
                     </button>
                   </Link>
                 )}
-                {!isAdmin && (
+                {!isAdmin && wesabiUser && (
                   <Link to="/dashboard/history/myrecord">
                     <button className="bg-myColor text-white px-3 py-2 rounded-md text-sm font-medium mhover:text-gray-300 hover:bg-myColor hover:text-white">
                       History

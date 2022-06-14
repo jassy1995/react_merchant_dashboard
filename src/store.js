@@ -16,7 +16,7 @@ const initialState = {
   filteredHistories: [],
   marketers: [],
   filterFeedback: "",
-  filterName: "",
+  filterName: null,
   filterDate: "",
   fetchHistory: false,
   loading: false,
@@ -61,7 +61,7 @@ function reducer(state, action) {
         ...state,
         filterValue: action.payload,
         filterFeedback: "",
-        filterName: "",
+        filterName: null,
         filterDate: "",
         loading: false,
       };

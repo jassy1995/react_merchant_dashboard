@@ -19,7 +19,7 @@ function HistoryPage() {
       filterFeedback,
       filterName,
       filterDate,
-    
+
       start4,
     },
     dispatch,
@@ -83,12 +83,13 @@ function HistoryPage() {
         try {
           let startingPoint = start4 > -1 ? start4 : 0;
 
-          const { data } = await axios.post(
-            `https://sellbackend.creditclan.com/parent/index.php/globalrequest/getmerchants/${startingPoint}/${filterFeedback}/${filterName}/${filterDate}`,
+          const { data } = await axios.get(
+            `https://sellbackend.creditclan.com/parent/index.php/globalrequest/getmerchantscalled/${startingPoint}/${filterFeedback}/${filterName}/${filterDate}`,
             { user_id: id }
           );
           console.log(id);
           console.log(data);
+          console.log(filterFeedback, filterName, filterDate);
           dispatch({ type: "UPDATE_HISTORY", payload: data.data });
           dispatch({ type: "END_FETCHING", payload: false });
         } catch (error) {
@@ -154,7 +155,7 @@ function HistoryPage() {
                 />
               </div>
             </div>
-           
+
             <TableHistory />
             {!loading && histories.length > 0 && (
               <div className="flex justify-end  mb-2 pr-5 ">
