@@ -128,7 +128,7 @@ function Navbar() {
               </div>
             </div>
 
-            <Disclosure.Panel className="md:hidden">
+            <Disclosure.Panel className="md:hidden bg-myColor">
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 {!isAdmin && wesabiUser && (
                   <Link to="/dashboard">
@@ -153,38 +153,42 @@ function Navbar() {
                 )}
               </div>
               <div className="pt-4 pb-3 border-t border-white">
-                <div className="flex items-center px-5">
-                  <div className="flex-shrink-0">
-                    <img
-                      className="h-10 w-10 rounded-full"
-                      src={user.imageUrl}
-                      alt=""
-                    />
-                  </div>
-                  <div className="ml-3">
-                    <div className="text-base font-medium leading-none text-white">
-                      {user.name}
+                <div className="flex justify-between items-center px-5">
+                  <div className="flex space-x-3">
+                    <div className="flex-shrink-0">
+                      <img
+                        className="h-10 w-10 rounded-full"
+                        src={user.imageUrl}
+                        alt=""
+                      />
                     </div>
-                    <div className="text-sm font-thin leading-none text-white ">
-                      {user.email}
+                    <div className="ml-3">
+                      <div className="text-base font-medium leading-none text-white">
+                        {user.name}
+                      </div>
+                      <div className="text-sm font-thin leading-none text-white ">
+                        {user.email}
+                      </div>
                     </div>
                   </div>
-                  <button
-                    type="button"
-                    className="ml-auto bg-white flex-shrink-0 p-1 rounded-full text-red-500 hover:text-red-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-white"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
+                  <div className="flex space-x-3">
+                    <button
+                      type="button"
+                      className="ml-auto bg-white flex-shrink-0 p-1 rounded-full text-red-500 hover:text-red-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-white"
+                    >
+                      <span className="sr-only">View notifications</span>
+                      <BellIcon className="h-6 w-6" aria-hidden="true" />
+                    </button>
 
-                  <button
-                    type="button"
-                    onClick={logout}
-                    className="ml-auto  bg-white flex-shrink-0 p-1 rounded-full text-red-500 hover:text-red-300 text-sm focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-offset-white focus:ring-white"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    logout
-                  </button>
+                    <button
+                      type="button"
+                      onClick={logout}
+                      className="ml-auto  bg-white flex-shrink-0 p-1 rounded-full text-red-500 hover:text-red-300 text-sm focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-offset-white focus:ring-white"
+                    >
+                      <span className="sr-only">View notifications</span>
+                      logout
+                    </button>
+                  </div>
                 </div>
               </div>
             </Disclosure.Panel>
