@@ -6,9 +6,9 @@ import { Store } from "../store";
 export default function FilterModal({ open, setOpen, setClose }) {
   const { state, dispatch } = useContext(Store);
   const { marketers } = state;
-  const [searchFeedback, setSearchFeedback] = useState("");
+  const [searchFeedback, setSearchFeedback] = useState(null);
   const [dateValue, setDateValue] = useState(null);
-  const [marketer, setMarketer] = useState("");
+  const [marketer, setMarketer] = useState(null);
 
   const handleDateUpdate = (e) => {
     const dateValue = e.target.value;

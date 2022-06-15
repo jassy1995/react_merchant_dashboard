@@ -19,7 +19,7 @@ function HistoryPage() {
       filterFeedback,
       filterName,
       filterDate,
-
+      count,
       start4,
     },
     dispatch,
@@ -40,6 +40,7 @@ function HistoryPage() {
           );
           console.log(data.data);
           dispatch({ type: "UPDATE_HISTORY", payload: data.data });
+          dispatch({ type: "SET_COUNT", payload: data.count });
           dispatch({ type: "END_FETCHING", payload: false });
         } catch (error) {
           dispatch({ type: "END_FETCHING", payload: false });
@@ -77,20 +78,24 @@ function HistoryPage() {
   useEffect(() => {
     async function getCustomerRequestData() {
       console.log(filterFeedback, filterName, filterDate);
-      if (filterFeedback && filterName && filterDate) {
-        console.log(id);
+      if (
+        (filterName && filterDate) ||
+        (filterFeedback && filterName && filterDate)
+      ) {
+        const filterByFeedback = filterFeedback ? filterFeedback : -1;
         dispatch({ type: "START_FETCHING", payload: true });
         try {
-          let startingPoint = start4 > -1 ? start4 : 0;
+          const startingPoint = start4 > -1 ? start4 : 0;
 
           const { data } = await axios.get(
-            `https://sellbackend.creditclan.com/parent/index.php/globalrequest/getmerchantscalled/${startingPoint}/${filterFeedback}/${filterName}/${filterDate}`,
+            `https://sellbackend.creditclan.com/parent/index.php/globalrequest/getmerchantscalled/${startingPoint}/${filterByFeedback}/${filterName}/${filterDate}`,
             { user_id: id }
           );
           console.log(id);
           console.log(data);
           console.log(filterFeedback, filterName, filterDate);
           dispatch({ type: "UPDATE_HISTORY", payload: data.data });
+          dispatch({ type: "SET_COUNT", payload: data.count });
           dispatch({ type: "END_FETCHING", payload: false });
         } catch (error) {
           dispatch({ type: "END_FETCHING", payload: false });
@@ -115,7 +120,10 @@ function HistoryPage() {
   ]);
 
   const next_function = async () => {
-    if (filterFeedback && filterName && filterDate) {
+    if (
+      (filterName && filterDate) ||
+      (filterFeedback && filterName && filterDate)
+    ) {
       dispatch({ type: "INCREASE_START4", payload: start4 + 20 });
     } else {
       dispatch({ type: "INCREASE_START2", payload: start2 + 20 });
@@ -123,7 +131,10 @@ function HistoryPage() {
   };
 
   const pre_function = async () => {
-    if (filterFeedback && filterName && filterDate) {
+    if (
+      (filterName && filterDate) ||
+      (filterFeedback && filterName && filterDate)
+    ) {
       dispatch({ type: "INCREASE_START4", payload: start4 - 20 });
     } else {
       dispatch({ type: "REDUCE_START2", payload: start2 - 20 });
@@ -140,7 +151,8 @@ function HistoryPage() {
         <div className="max-w-7xl mx-auto py-2 sm:px-6 lg:px-8 overflow-auto">
           <div className="px-4 py-2 sm:px-0">
             <FilterModal open={open} setOpen={setOpen} setClose={closeModal} />
-            <div className="flex justify-end mt-5 cursor:pointer">
+            <div className="flex justify-end space-x-6 mt-5 cursor:pointer">
+              <div className="font-mono">Total: {count}</div>
               <div
                 onClick={() => setOpen(true)}
                 className="flex space-x-2 rounded-lg w-20 cursor:pointer ring-1 bg-transparent border-1 border-gray-600 hover:border-blue-500 hover:bg-gray-200 hover:ring-2 hover:ring-blue-300 p-2"

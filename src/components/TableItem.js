@@ -119,17 +119,17 @@ function TableItem() {
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border border-slate-300">
                           <button
                             onClick={() => copyLink(request.phone)}
-                            className="bg-yellow-500 px-2 py-1 text-white text-sm font-medium rounded-lg"
+                            className="bg-yellow-100 px-2 py-1 text-yellow-700 text-sm font-medium rounded-full text-center"
                           >
                             copy link
                           </button>
                         </td>
-                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border border-slate-300">
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border border-slate-300 text-center">
                           <button
                             className={
                               request?.feedback_provided?.toString() === "1"
-                                ? "bg-green-500 px-2 py-1 text-white text-sm font-medium rounded-lg"
-                                : "bg-red-500 px-2 py-1 text-white text-sm font-medium rounded-lg"
+                                ? "bg-green-100 px-2 py-1 text-green-700 text-sm font-medium rounded-lg"
+                                : "bg-red-100 px-2 py-1 text-red-700 text-sm font-medium rounded-full"
                             }
                             onClick={() =>
                               giveFeedback(
