@@ -91,7 +91,7 @@ function Navbar() {
                         </Menu.Button>
 
                         <Menu.Button
-                          className="font-bold text-red-500 bg-white py-1 px-2 rounded-full ml-2"
+                          className="font-bold text-red-500 bg-white py-1 px-2 rounded-full ml-2 font-mono"
                           onClick={logout}
                         >
                           logout
@@ -183,7 +183,7 @@ function Navbar() {
                     <button
                       type="button"
                       onClick={logout}
-                      className="ml-auto  bg-white flex-shrink-0 p-1 rounded-full text-red-500 hover:text-red-300 text-sm focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-offset-white focus:ring-white"
+                      className="ml-auto font-mono bg-white flex-shrink-0 p-1 rounded-full text-red-500 hover:text-red-300 text-sm focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-offset-white focus:ring-white"
                     >
                       <span className="sr-only">View notifications</span>
                       logout
