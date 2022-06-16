@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { CSVLink } from "react-csv";
 import { Store } from "../store";
 import { toast } from "react-toastify";
@@ -6,7 +6,6 @@ const axios = require("axios");
 
 const Downloader = () => {
   const fileName = "marketer-report";
-  const [userData, setUserData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const {
@@ -35,7 +34,6 @@ const Downloader = () => {
       .get("https://jsonplaceholder.typicode.com/users")
       .then((res) => {
         dispatch({ type: "END_FETCHING", payload: false });
-        setUserData(res.data);
         setLoading(false);
       })
       .catch((error) => {
