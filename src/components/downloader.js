@@ -1,16 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { CSVLink } from "react-csv";
 import { Store } from "../store";
-import { toast } from "react-toastify";
-const axios = require("axios");
+i;
+
+const fileName = "marketer-report";
 
 const Downloader = () => {
-  const fileName = "marketer-report";
-  const [loading, setLoading] = useState(false);
-
   const {
     state: { histories },
-    dispatch,
   } = useContext(Store);
 
   const headers = [
@@ -23,28 +20,6 @@ const Downloader = () => {
     { label: "opinion", key: "opinion" },
     { label: "date", key: "feedback_date" },
   ];
-
-  useEffect(() => {
-    getUserData();
-  });
-
-  const getUserData = () => {
-    dispatch({ type: "START_FETCHING", payload: true });
-    axios
-      .get("https://jsonplaceholder.typicode.com/users")
-      .then((res) => {
-        dispatch({ type: "END_FETCHING", payload: false });
-        setLoading(false);
-      })
-      .catch((error) => {
-        dispatch({ type: "END_FETCHING", payload: false });
-        let msg = error?.message
-          ? error.message
-          : "no or poor internet connection, try it again";
-        toast.error(msg);
-        console.log(error);
-      });
-  };
 
   return (
     <div className="container">
