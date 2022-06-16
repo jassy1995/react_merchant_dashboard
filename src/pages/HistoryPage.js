@@ -36,7 +36,7 @@ function HistoryPage() {
         dispatch({ type: "START_FETCHING", payload: true });
         try {
           let startingPoint = start2 > -1 ? start2 : 0;
-          const { data } = await axios.get(
+          const { data } = await axios.post(
             `https://sellbackend.creditclan.com/parent/index.php/globalrequest/getmerchantscalled/${startingPoint}/${filterValue}`,
             { user_id: id }
           );
