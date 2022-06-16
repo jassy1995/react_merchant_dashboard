@@ -22,6 +22,7 @@ const initialState = {
   filterEndDate: null,
   fetchHistory: false,
   loading: false,
+  downloads: [],
   wesabiUser: localStorage.getItem("wesabiUser")
     ? JSON.parse(localStorage.getItem("wesabiUser"))
     : null,
@@ -48,7 +49,11 @@ function reducer(state, action) {
         ...state,
         marketers: action.payload,
       };
-
+    case "UPDATE_DOWNLOAD":
+      return {
+        ...state,
+        downloads: action.payload,
+      };
     case "SET_COUNT":
       return {
         ...state,

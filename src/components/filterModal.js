@@ -104,7 +104,7 @@ export default function FilterModal({ open, setOpen, setClose }) {
                             <div className="flex py-6">
                               <div className="ml-4 flex flex-1 flex-col">
                                 <h2 className="font-mono font-medium text-slate-700">
-                                  filter by feedback
+                                  filter by feedback only
                                 </h2>
                                 <div className="mt-3">
                                   <select
@@ -129,12 +129,12 @@ export default function FilterModal({ open, setOpen, setClose }) {
                               </div>
                             </div>
                             <div className="border-t divide-y divide-gray-200"></div>
-                            <div className="flex py-6 flex-wrap">
+                            <div className="flex py-2 flex-wrap">
                               <div className="ml-4 flex flex-1 flex-col">
                                 <h3 className="font-mono font-bold text-slate-700">
                                   filter by :
                                 </h3>
-                                <div className="mt-4 flex flex-col space-y-6">
+                                <div className="mt-4 flex flex-col space-y-4">
                                   <div className="flex flex-col space-y-1">
                                     <div className="text-md ml-1 font-thin">
                                       feedback
@@ -181,7 +181,7 @@ export default function FilterModal({ open, setOpen, setClose }) {
                                     </select>
                                   </div>
                                 </div>
-                                <div className="flex flex-col space-y-1 mt-4">
+                                <div className="flex flex-col space-y-1 mt-3">
                                   <div>
                                     <div className="text-md ml-1 font-thin">
                                       start date
@@ -206,7 +206,7 @@ export default function FilterModal({ open, setOpen, setClose }) {
 
                                 <button
                                   type="button"
-                                  className="font-medium text-white hover:text-slate-200 bg-myColor rounded-md mt-5 p-2 disabled:opacity-75 disabled:cursor-not-allowed"
+                                  className="font-medium text-white hover:text-slate-200 bg-myColor rounded-md mt-2 p-2 disabled:opacity-75 disabled:cursor-not-allowed"
                                   disabled={
                                     !endDateValue ||
                                     !startDateValue ||

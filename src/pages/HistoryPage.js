@@ -40,7 +40,12 @@ function HistoryPage() {
             `https://sellbackend.creditclan.com/parent/index.php/globalrequest/getmerchantscalled/${startingPoint}/${filterValue}`,
             { user_id: id }
           );
-          console.log(data.data);
+          let dpoint = 0;
+          const downloads = await axios.post(
+            `https://sellbackend.creditclan.com/parent/index.php/globalrequest/getmerchantscalled/${dpoint}/${filterValue}`,
+            { user_id: id, download: 1 }
+          );
+          dispatch({ type: "UPDATE_DOWNLOAD", payload: downloads.data.data });
           dispatch({ type: "UPDATE_HISTORY", payload: data.data });
           dispatch({ type: "SET_COUNT", payload: data.count });
           dispatch({ type: "END_FETCHING", payload: false });
@@ -87,15 +92,6 @@ function HistoryPage() {
         dispatch({ type: "START_FETCHING", payload: true });
         try {
           const startingPoint = start4 > -1 ? start4 : 0;
-
-          console.log(
-            startingPoint,
-            filterByFeedback,
-            filterStartDate,
-            filterEndDate,
-            filterName
-          );
-
           const { data } = await axios.post(
             `https://sellbackend.creditclan.com/parent/index.php/globalrequest/getmerchantscalled/${startingPoint}/${filterByFeedback}/${filterName}`,
             {
@@ -104,7 +100,17 @@ function HistoryPage() {
               end_date: filterEndDate,
             }
           );
-
+          let dpoint = 0;
+          const downloads = await axios.post(
+            `https://sellbackend.creditclan.com/parent/index.php/globalrequest/getmerchantscalled/${dpoint}/${filterByFeedback}/${filterName}`,
+            {
+              user_id: id,
+              start_date: filterStartDate,
+              end_date: filterEndDate,
+              download: 1,
+            }
+          );
+          dispatch({ type: "UPDATE_DOWNLOAD", payload: downloads.data.data });
           dispatch({ type: "UPDATE_HISTORY", payload: data.data });
           dispatch({ type: "SET_COUNT", payload: data.count });
           dispatch({ type: "END_FETCHING", payload: false });

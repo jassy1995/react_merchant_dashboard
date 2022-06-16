@@ -24,6 +24,7 @@ function Navbar() {
     toast.success("successfully logged out");
     dispatch({ type: "SAVE_USER", payload: null });
     dispatch({ type: "UPDATE_ADMIN", payload: false });
+    dispatch({ type: "UPDATE_DOWNLOAD", payload: [] });
     navigate("/");
   };
 

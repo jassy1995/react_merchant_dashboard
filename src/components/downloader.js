@@ -6,7 +6,7 @@ const fileName = "marketer-report";
 
 const Downloader = () => {
   const {
-    state: { histories },
+    state: { downloads, loading },
   } = useContext(Store);
 
   const headers = [
@@ -22,14 +22,17 @@ const Downloader = () => {
 
   return (
     <div className="container">
-      <button className="font-bold text-white bg-myColor py-1 px-2 rounded-full  font-mono">
+      <button
+        className="font-bold text-white bg-myColor py-1 px-2 rounded-full  font-mono disabled:opacity-75 disabled:cursor-not-allowed"
+        disabled={!downloads?.length}
+      >
         <CSVLink
           headers={headers}
-          data={histories}
+          data={downloads}
           filename={fileName}
           style={{ textDecoration: "none", color: "#fff" }}
         >
-          Download
+          {loading ? "Downloading..." : "Download"}
         </CSVLink>
       </button>
     </div>
