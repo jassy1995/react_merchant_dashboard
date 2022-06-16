@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { CSVLink } from "react-csv";
 import { Store } from "../store";
-i;
 
 const fileName = "marketer-report";
 
@@ -30,7 +29,7 @@ const Downloader = () => {
           filename={fileName}
           style={{ textDecoration: "none", color: "#fff" }}
         >
-          {loading ? "Downloading..." : "Download"}
+          Download
         </CSVLink>
       </button>
     </div>
