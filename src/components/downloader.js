@@ -26,7 +26,7 @@ const Downloader = () => {
 
   useEffect(() => {
     getUserData();
-  }, []);
+  });
 
   const getUserData = () => {
     dispatch({ type: "START_FETCHING", payload: true });
