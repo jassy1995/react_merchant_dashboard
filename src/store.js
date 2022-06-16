@@ -35,10 +35,9 @@ function reducer(state, action) {
       return { ...state, loading: action.payload };
     case "END_FETCHING":
       return { ...state, loading: action.payload };
-    case "RESET_FILTER":
+    case "UPDATE_GROUP_FILTER":
       return {
         ...state,
-        filterValue: "",
         filterFeedback: action.payload.feedback,
         filterName: action.payload.marketer,
         filterStartDate: action.payload.startDate,
@@ -48,6 +47,19 @@ function reducer(state, action) {
       return {
         ...state,
         marketers: action.payload,
+      };
+    case "RESET_SINGLE_FILTER":
+      return {
+        ...state,
+        filterValue: "",
+      };
+    case "RESET_GROUP_FILTER":
+      return {
+        ...state,
+        filterFeedback: null,
+        filterName: null,
+        filterStartDate: null,
+        filterEndDate: null,
       };
     case "UPDATE_DOWNLOAD":
       return {
@@ -70,15 +82,10 @@ function reducer(state, action) {
         ...state,
         filteredHistories: action.payload,
       };
-    case "UPDATE_FILTER":
+    case "UPDATE_SINGLE_FILTER":
       return {
         ...state,
         filterValue: action.payload,
-        filterFeedback: null,
-        filterName: null,
-        filterStartDate: null,
-        filterEndDate: null,
-        count: 0,
       };
     case "UPDATE_HISTORY":
       return {

@@ -6,7 +6,7 @@ const fileName = "marketer-report";
 
 const Downloader = () => {
   const {
-    state: { downloads, loading },
+    state: { downloads },
   } = useContext(Store);
 
   const headers = [
@@ -32,7 +32,7 @@ const Downloader = () => {
           filename={fileName}
           style={{ textDecoration: "none", color: "#fff" }}
         >
-          {loading ? "Downloading..." : "Download"}
+          Download
         </CSVLink>
       </button>
     </div>

@@ -22,8 +22,10 @@ export default function FilterModal({ open, setOpen, setClose }) {
   };
 
   const fetchFilter = () => {
+    dispatch({ type: "RESET_SINGLE_FILTER" });
+    dispatch({ type: "RESET_GROUP_FILTER" });
     dispatch({
-      type: "RESET_FILTER",
+      type: "UPDATE_GROUP_FILTER",
       payload: {
         feedback: searchFeedback,
         marketer: marketer,
@@ -31,11 +33,17 @@ export default function FilterModal({ open, setOpen, setClose }) {
         endDate: endDateValue,
       },
     });
+    setStartDateValue(null);
+    setEndDateValue(null);
+    setSearchFeedback(null);
+    setMarketer(null);
     setClose();
   };
 
   const handleSelectedChange = (event) => {
-    dispatch({ type: "UPDATE_FILTER", payload: event.target.value });
+    dispatch({ type: "RESET_GROUP_FILTER" });
+    dispatch({ type: "UPDATE_SINGLE_FILTER", payload: event.target.value });
+
     setClose();
   };
 

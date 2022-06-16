@@ -31,6 +31,7 @@ function HistoryPage() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    console.log("first");
     async function getCustomerRequestData() {
       if (filterValue) {
         dispatch({ type: "START_FETCHING", payload: true });
@@ -63,6 +64,7 @@ function HistoryPage() {
   }, [id, filterValue, dispatch, start2]);
 
   useEffect(() => {
+    console.log("second");
     async function getMarketers() {
       dispatch({ type: "START_FETCHING", payload: true });
       try {
@@ -89,6 +91,7 @@ function HistoryPage() {
         (filterFeedback && filterName && filterStartDate && filterEndDate)
       ) {
         const filterByFeedback = filterFeedback ? filterFeedback : -1;
+        console.log(filterByFeedback);
         dispatch({ type: "START_FETCHING", payload: true });
         try {
           const startingPoint = start4 > -1 ? start4 : 0;
@@ -110,6 +113,7 @@ function HistoryPage() {
               download: 1,
             }
           );
+          console.log(data.data);
           dispatch({ type: "UPDATE_DOWNLOAD", payload: downloads.data.data });
           dispatch({ type: "UPDATE_HISTORY", payload: data.data });
           dispatch({ type: "SET_COUNT", payload: data.count });
