@@ -6,6 +6,7 @@ import { Store } from "../store";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { FilterIcon } from "@heroicons/react/outline";
+import Downloader from "../components/downloader";
 
 function HistoryPage() {
   const {
@@ -18,7 +19,8 @@ function HistoryPage() {
       fetchHistory,
       filterFeedback,
       filterName,
-      filterDate,
+      filterStartDate,
+      filterEndDate,
       count,
       start4,
     },
@@ -77,23 +79,32 @@ function HistoryPage() {
 
   useEffect(() => {
     async function getCustomerRequestData() {
-      console.log(filterFeedback, filterName, filterDate);
       if (
-        (filterName && filterDate) ||
-        (filterFeedback && filterName && filterDate)
+        (filterName && filterStartDate && filterEndDate) ||
+        (filterFeedback && filterName && filterStartDate && filterEndDate)
       ) {
         const filterByFeedback = filterFeedback ? filterFeedback : -1;
         dispatch({ type: "START_FETCHING", payload: true });
         try {
           const startingPoint = start4 > -1 ? start4 : 0;
 
-          const { data } = await axios.get(
-            `https://sellbackend.creditclan.com/parent/index.php/globalrequest/getmerchantscalled/${startingPoint}/${filterByFeedback}/${filterName}/${filterDate}`,
-            { user_id: id }
+          console.log(
+            startingPoint,
+            filterByFeedback,
+            filterStartDate,
+            filterEndDate,
+            filterName
           );
-          console.log(id);
-          console.log(data);
-          console.log(filterFeedback, filterName, filterDate);
+
+          const { data } = await axios.post(
+            `https://sellbackend.creditclan.com/parent/index.php/globalrequest/getmerchantscalled/${startingPoint}/${filterByFeedback}/${filterName}`,
+            {
+              user_id: id,
+              start_date: filterStartDate,
+              end_date: filterEndDate,
+            }
+          );
+
           dispatch({ type: "UPDATE_HISTORY", payload: data.data });
           dispatch({ type: "SET_COUNT", payload: data.count });
           dispatch({ type: "END_FETCHING", payload: false });
@@ -115,14 +126,15 @@ function HistoryPage() {
     start4,
     filterFeedback,
     filterName,
-    filterDate,
+    filterStartDate,
+    filterEndDate,
     fetchHistory,
   ]);
 
   const next_function = async () => {
     if (
-      (filterName && filterDate) ||
-      (filterFeedback && filterName && filterDate)
+      (filterName && filterStartDate && filterEndDate) ||
+      (filterFeedback && filterName && filterStartDate && filterEndDate)
     ) {
       dispatch({ type: "INCREASE_START4", payload: start4 + 20 });
     } else {
@@ -132,8 +144,8 @@ function HistoryPage() {
 
   const pre_function = async () => {
     if (
-      (filterName && filterDate) ||
-      (filterFeedback && filterName && filterDate)
+      (filterName && filterStartDate && filterEndDate) ||
+      (filterFeedback && filterName && filterStartDate && filterEndDate)
     ) {
       dispatch({ type: "INCREASE_START4", payload: start4 - 20 });
     } else {
@@ -151,20 +163,27 @@ function HistoryPage() {
         <div className="max-w-7xl mx-auto py-2 sm:px-6 lg:px-8 overflow-auto">
           <div className="px-4 py-2 sm:px-0">
             <FilterModal open={open} setOpen={setOpen} setClose={closeModal} />
-            <div className="flex justify-end space-x-6 mt-5 cursor:pointer">
-              <div className="font-mono">Total: {count}</div>
-              <div
-                onClick={() => setOpen(true)}
-                className="flex space-x-2 rounded-lg w-20 cursor:pointer ring-1 bg-transparent border-1 border-gray-600 hover:border-blue-500 hover:bg-gray-200 hover:ring-2 hover:ring-blue-300 p-2"
-              >
-                <span className="text-sm font-medium text-slate-400 cursor:pointer">
-                  filter
-                </span>
-                <FilterIcon
-                  className="h-4 text-blue-500 mt-1  hover:text-blue-700 text-sm cursor:pointer"
-                  aria-hidden="true"
+            <div className="flex justify-between items-center space-x-6 mt-5 cursor:pointer">
+              <div className="flex items-center space-x-6">
+                <Downloader />
+              </div>
+              <div className="flex items-center space-x-4">
+                <div className="font-mono font-bold text-lg">
+                  Total: {count}
+                </div>
+                <div
                   onClick={() => setOpen(true)}
-                />
+                  className="flex space-x-2 rounded-lg w-20 cursor:pointer ring-1 bg-transparent border-1 border-gray-600 hover:border-blue-500 hover:bg-gray-200 hover:ring-2 hover:ring-blue-300 p-2"
+                >
+                  <span className="text-sm font-medium text-slate-400 cursor:pointer">
+                    filter
+                  </span>
+                  <FilterIcon
+                    className="h-4 text-blue-500 mt-1  hover:text-blue-700 text-sm cursor:pointer"
+                    aria-hidden="true"
+                    onClick={() => setOpen(true)}
+                  />
+                </div>
               </div>
             </div>
 

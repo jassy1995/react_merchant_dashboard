@@ -7,23 +7,28 @@ export default function FilterModal({ open, setOpen, setClose }) {
   const { state, dispatch } = useContext(Store);
   const { marketers } = state;
   const [searchFeedback, setSearchFeedback] = useState(null);
-  const [dateValue, setDateValue] = useState(null);
+  const [startDateValue, setStartDateValue] = useState(null);
+  const [endDateValue, setEndDateValue] = useState(null);
   const [marketer, setMarketer] = useState(null);
 
-  const handleDateUpdate = (e) => {
+  const handleStartDateUpdate = (e) => {
     const dateValue = e.target.value;
-    console.log("dateValue", dateValue);
-    setDateValue(dateValue);
+    setStartDateValue(dateValue);
+  };
+
+  const handleEndDateUpdate = (e) => {
+    const dateValue = e.target.value;
+    setEndDateValue(dateValue);
   };
 
   const fetchFilter = () => {
-    console.log(searchFeedback, marketer, dateValue);
     dispatch({
       type: "RESET_FILTER",
       payload: {
         feedback: searchFeedback,
         marketer: marketer,
-        date: dateValue,
+        startDate: startDateValue,
+        endDate: endDateValue,
       },
     });
     setClose();
@@ -35,7 +40,6 @@ export default function FilterModal({ open, setOpen, setClose }) {
   };
 
   const handleSelectedMarketer = (event) => {
-    console.log(event.target.value);
     setMarketer(event.target.value);
   };
 
@@ -178,19 +182,36 @@ export default function FilterModal({ open, setOpen, setClose }) {
                                   </div>
                                 </div>
                                 <div className="flex flex-col space-y-1 mt-4">
-                                  <div className="text-md ml-1 font-thin">
-                                    date
+                                  <div>
+                                    <div className="text-md ml-1 font-thin">
+                                      start date
+                                    </div>
+                                    <input
+                                      type="date"
+                                      onChange={(e) => handleStartDateUpdate(e)}
+                                      className="w-full mb-3 appearance-none block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    ></input>
                                   </div>
-                                  <input
-                                    type="date"
-                                    onChange={(e) => handleDateUpdate(e)}
-                                    className="w-full mb-3 appearance-none block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                  ></input>
+                                  <div>
+                                    <div className="text-md ml-1 font-thin">
+                                      end date
+                                    </div>
+                                    <input
+                                      type="date"
+                                      onChange={(e) => handleEndDateUpdate(e)}
+                                      className="w-full mb-3 appearance-none block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    ></input>
+                                  </div>
                                 </div>
 
                                 <button
                                   type="button"
-                                  className="font-medium text-white hover:text-slate-200 bg-myColor rounded-md mt-5 p-2"
+                                  className="font-medium text-white hover:text-slate-200 bg-myColor rounded-md mt-5 p-2 disabled:opacity-75 disabled:cursor-not-allowed"
+                                  disabled={
+                                    !endDateValue ||
+                                    !startDateValue ||
+                                    !marketer
+                                  }
                                   onClick={fetchFilter}
                                 >
                                   search

@@ -18,7 +18,8 @@ const initialState = {
   marketers: [],
   filterFeedback: null,
   filterName: null,
-  filterDate: null,
+  filterStartDate: null,
+  filterEndDate: null,
   fetchHistory: false,
   loading: false,
   wesabiUser: localStorage.getItem("wesabiUser")
@@ -39,7 +40,8 @@ function reducer(state, action) {
         filterValue: "",
         filterFeedback: action.payload.feedback,
         filterName: action.payload.marketer,
-        filterDate: action.payload.date,
+        filterStartDate: action.payload.startDate,
+        filterEndDate: action.payload.endDate,
       };
     case "UPDATE_MARKETER":
       return {
@@ -69,7 +71,8 @@ function reducer(state, action) {
         filterValue: action.payload,
         filterFeedback: null,
         filterName: null,
-        filterDate: null,
+        filterStartDate: null,
+        filterEndDate: null,
         count: 0,
       };
     case "UPDATE_HISTORY":
