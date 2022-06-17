@@ -13,7 +13,7 @@ const initialState = {
   start3: 0,
   start4: 0,
   count: 0,
-  filterValue: "yes",
+  filterValue: -1,
   filteredHistories: [],
   marketers: [],
   filterFeedback: null,
